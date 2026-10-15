@@ -13,7 +13,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,19 +44,6 @@ public class PokemonGestor {
                                                     String laURL = jsonObject.getJSONObject("sprites")
                                                             .getString("front_default");
                                                     listaPokemons.get(pokemonActual).setUrlImagen(laURL);
-
-                                                    List <String> tipo = new ArrayList<>();
-                                                    //creo el json
-                                                    JSONArray tipos = jsonObject.getJSONArray("types");
-                                                    //ya está cargado ahora, lo recorremos
-                                                    for (int j = 0; tipos.length() ; j++) {
-                                                        tipo.add(tipos.getJSONObject(j).getJSONObject("type")
-                                                                .getString("name"));
-
-                                                    }
-
-                                                    listaPokemons.get(pokemonActual).setHabilidades(tipo);
-
                                                 } catch (JSONException e) {
 
                                                     throw new RuntimeException(e);
@@ -71,7 +57,6 @@ public class PokemonGestor {
                                             }
                                         }
                                 );
-                                queue.add(solicitudPokemon);
                                 listaPokemons.add(new Pokemon(results.getJSONObject(i).getString("name"),
                                         i + 1, null, null, null));
                             }
@@ -91,8 +76,6 @@ public class PokemonGestor {
         );
         queue.add(solicitudPokemons);
     }
-
-
 
 
 
