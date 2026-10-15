@@ -1,7 +1,10 @@
 package com.example.pokemons;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +25,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    RequestQueue queue;
+    ImageView ivPikachu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,41 +39,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        queue = Volley.newRequestQueue(this);
+        // Paso el contexto a mi gestor
+        PokemonGestor.contexto = getBaseContext();
+        // Cargo la lista de Pokemons
+        Log.e("Andrea","comienzo");
+        PokemonGestor.cargaInicialPokemons();
 
+        ivPikachu = findViewById(R.id.ivPikachu);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                "https://pokeapi.co/api/v2/pokemon",
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        Log.d("Andrea", jsonObject.toString());
-                        Log.i("andrea", "count");
-
-                        try {
-                            //es una array
-                            JSONArray resultados = jsonObject.getJSONArray("results");
-
-                            //el primer elemento del array
-                            JSONObject elemento0 = resultados.getJSONObject(0);
-
-                            Log.e("andrea", elemento0.getString("name"));
-
-
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-
-                    }
-                }
-    );
-
-
-        queue.add(jsonObjectRequest);
+        ivPikachu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),PantallaPokemons.class);
+                startActivity(intent);
+            }
+        });
     }
 }
