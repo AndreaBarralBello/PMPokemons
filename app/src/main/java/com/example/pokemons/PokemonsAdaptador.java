@@ -44,7 +44,7 @@ public class PokemonsAdaptador extends RecyclerView.Adapter <PokemonsAdaptador.V
 
         holder.tvPokemonsNombre.setText(pokemonActual.getNombre());
 
-        holder.tvPokemonsNombre.setText(pokemonActual.getTipos().getFirst());
+        holder.tvPokemonsNombre.setText(pokemonActual.getTipos().toString().length());
         if(pokemonActual.getImagen() != null){
     //si ya tiene la imagen la cargo, sino la pido
             holder.ivPokemons.setImageBitmap(pokemonActual.getImagen());

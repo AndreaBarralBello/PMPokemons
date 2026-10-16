@@ -1,5 +1,6 @@
 package com.example.pokemons;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,8 @@ public class PokemonAdaptador extends RecyclerView.Adapter <PokemonAdaptador.Vie
     @Override
     public void onBindViewHolder(@NonNull PokemonAdaptador.ViewHolder holder, int position) {
 
-        holder.tvPokemonsNombre.setText(itemList.get(position).nombre);
+        holder.tvPokemonsNombre.setText(itemList.get(position).getNombre());
+        Log.e("Andrea", itemList.get(position).getNombre());
     }
 
     @Override

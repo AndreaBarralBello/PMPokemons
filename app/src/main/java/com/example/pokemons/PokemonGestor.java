@@ -2,6 +2,7 @@ package com.example.pokemons;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,7 +22,7 @@ public class PokemonGestor {
     static Context contexto;
     static List<Pokemon> listaPokemons = new ArrayList<>();
 
-    public static void cargaInicialPokemons(){
+    public static void cargaInicialPokemons(ProgressBar pbCarga){
 
 
         RequestQueue queue = Volley.newRequestQueue(contexto);
@@ -32,7 +33,11 @@ public class PokemonGestor {
                     public void onResponse(JSONObject jsonObject) {
                         try {
                             JSONArray results = jsonObject.getJSONArray("results");
+
+                            //cantidad máxima de elementos
+                            pbCarga.setMax(results.length());
                             for (int i = 0; i < results.length(); i++) {
+                                pbCarga.setProgress(i);
                                 final int pokemonActual = i;
                                 JsonObjectRequest solicitudPokemon = new JsonObjectRequest(
                                         results.getJSONObject(i).getString("url"),
@@ -44,6 +49,13 @@ public class PokemonGestor {
                                                     String laURL = jsonObject.getJSONObject("sprites")
                                                             .getString("front_default");
                                                     listaPokemons.get(pokemonActual).setUrlImagen(laURL);
+                                                    List<String> tipo = new ArrayList<>();
+                                                    JSONArray tipos = jsonObject.getJSONArray("types");
+                                                    for (int j = 0; j<tipos.length() ; j++) {
+                                                        tipo.add(tipos.getJSONObject(j).getJSONObject("type").getString("name"));
+
+                                                    }
+                                                    listaPokemons.get(pokemonActual).getTipos(tipo);
                                                 } catch (JSONException e) {
 
                                                     throw new RuntimeException(e);

@@ -48,7 +48,7 @@ public class Pokemon {
         this.habilidades = habilidades;
     }
 
-    public List<String> getTipos() {
+    public List<String> getTipos(List<String> tipo) {
         return tipos;
     }
 
