@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         pbCarga = findViewById(R.id.pbCarga);
         // Paso el contexto a mi gestor
-        PokemonGestor.contexto = getBaseContext(pbCarga);
+        PokemonGestor.contexto = MainActivity.this;
         // Cargo la lista de Pokemons
         Log.e("Andrea","comienzo");
         PokemonGestor.cargaInicialPokemons();

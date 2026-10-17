@@ -27,6 +27,10 @@
             android:name=".PantallaPokemons"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".PantallaDetallePokemon"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

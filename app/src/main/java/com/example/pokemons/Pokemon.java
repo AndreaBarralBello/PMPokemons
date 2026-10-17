@@ -15,6 +15,21 @@ public class Pokemon {
     //pero no se carga la imagen al crear el objeto(tardaría mucho) pq son muchos objetos
     //se descarga la imagen cuando se muestra por pantalla
     private Bitmap imagen;
+    private int altura;
+    private int peso;
+    private String detail;
+
+    public Pokemon(String nombre, int numero, List<String> habilidades, List<String> tipos,
+                   String urlImagen, int altura, int peso, String detail) {
+        this.nombre = nombre;
+        this.numero = numero;
+        this.habilidades = habilidades;
+        this.tipos = tipos;
+        this.urlImagen = urlImagen;
+        this.altura = altura;
+        this.peso = peso;
+        this.detail = detail;
+    }
 
     public Pokemon(String nombre, int numero, List<String> habilidades, List<String> tipos, String urlImagen) {
         this.nombre = nombre;
@@ -48,7 +63,7 @@ public class Pokemon {
         this.habilidades = habilidades;
     }
 
-    public List<String> getTipos(List<String> tipo) {
+    public List<String> getTipos() {
         return tipos;
     }
 
@@ -72,6 +87,29 @@ public class Pokemon {
         this.imagen = imagen;
     }
 
+    public int getAltura() {
+        return altura;
+    }
+
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
+
+    public int getPeso() {
+        return peso;
+    }
+
+    public void setPeso(int peso) {
+        this.peso = peso;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
 
     @Override
     public String toString() {

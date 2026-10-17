@@ -1,5 +1,6 @@
 package com.example.pokemons;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,20 @@ public class PokemonsAdaptador extends RecyclerView.Adapter <PokemonsAdaptador.V
 
         holder.tvPokemonsNombre.setText(pokemonActual.getNombre());
 
-        holder.tvPokemonsNombre.setText(pokemonActual.getTipos().toString().length());
+        holder.tvPokemonsTipo.setText(pokemonActual.getTipos().toString());
+
+        //al pulsar en el item, nos abre la nueva pantalla
+        holder.itemView.setOnClickListener(view -> {
+
+            Intent intent = new Intent(view.getContext(), PantallaDetallePokemon.class);
+
+            intent.putExtra("id", pokemonActual.getNumero());
+            intent.putExtra("nombre", pokemonActual.getNombre());
+            intent.putExtra("urlImagen", pokemonActual.getUrlImagen());
+
+            view.getContext().startActivity(intent);
+
+        });
         if(pokemonActual.getImagen() != null){
     //si ya tiene la imagen la cargo, sino la pido
             holder.ivPokemons.setImageBitmap(pokemonActual.getImagen());
@@ -92,6 +106,10 @@ public class PokemonsAdaptador extends RecyclerView.Adapter <PokemonsAdaptador.V
         TextView tvPokemonsNombre;
         TextView tvPokemonsTipo;
 
+
+
+
+
         public ViewHolder (@NonNull View itemView){
 
             super(itemView);
@@ -99,6 +117,8 @@ public class PokemonsAdaptador extends RecyclerView.Adapter <PokemonsAdaptador.V
             tvPokemonsNombre = itemView.findViewById(R.id.tvPokemonsNombre);
             ivPokemons = itemView.findViewById(R.id.ivPokemons);
             tvPokemonsTipo = itemView.findViewById(R.id.tvPokemonsTipo);
+
+
         }
 
 

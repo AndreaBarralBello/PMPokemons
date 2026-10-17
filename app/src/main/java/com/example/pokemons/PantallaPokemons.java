@@ -1,14 +1,20 @@
 package com.example.pokemons;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class PantallaPokemons extends AppCompatActivity {
+
+
+    RecyclerView rvListaPokemons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,5 +22,14 @@ public class PantallaPokemons extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pantalla_pokemons);
 
+
+        rvListaPokemons = findViewById(R.id.rvListaPokemons);
+
+        rvListaPokemons.setLayoutManager(new LinearLayoutManager(this));
+
+        PokemonsAdaptador pokemonsAdaptador = new PokemonsAdaptador(PokemonGestor.listaPokemons);
+
+        rvListaPokemons.setAdapter(pokemonsAdaptador);
+        Log.d("POKEMONS", "lista = " + PokemonGestor.listaPokemons);
     }
 }
